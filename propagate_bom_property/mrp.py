@@ -32,9 +32,9 @@ class MRP_Production(osv.Model):
                 production, procurement_id, context)
         procurement_obj = self.pool.get('procurement.order')
         proc_id = procurement_obj.search(cr, uid,
-                [('production_id','=',production.id)], context=context)[0]
+                [('production_id','=',production.id)], context=context)
         if proc_id:
-            procurement = procurement_obj.browse(cr, uid, proc_id)
+            procurement = procurement_obj.browse(cr, uid, proc_id[0])
             if procurement.property_ids:
                 property_ids = [property.id for property in procurement.property_ids]
                 procurement_obj.write(cr, uid, procurement_id, {'property_ids':
